@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import * as React from 'react';
 import { Searchbar, Divider } from 'react-native-paper';
 import { View } from '../components/Themed';
@@ -12,26 +12,31 @@ export default function TabTwoScreen() {
   const [searchQuery, setSearchQuery] = React.useState('');
 
   const handleChangeSearch = (query: React.SetStateAction<string>) => setSearchQuery(query);
-  const handleSelectPatient = (patient: string) => clientProfileRef?.current?.showModal(patient);
+  const handleSelectPatient = (patient: string) => {
+    Keyboard.dismiss();
+    clientProfileRef?.current?.showModal(patient);
+  };
 
   const clientProfileRef = useRef<ClientProfileInterface>(null);
 
   return (
-    <View style={styles.container}>
-      <Searchbar placeholder='Client name' onChangeText={handleChangeSearch} value={searchQuery} />
-      <PatientItem onSelectPatient={handleSelectPatient} />
-      <Divider />
-      <PatientItem onSelectPatient={handleSelectPatient} />
-      <Divider />
-      <PatientItem onSelectPatient={handleSelectPatient} />
-      <Divider />
-      <PatientItem onSelectPatient={handleSelectPatient} />
-      <Divider />
-      <PatientItem onSelectPatient={handleSelectPatient} />
-      <Divider />
-      <Fab />
-      <ClientProfile ref={clientProfileRef} />
-    </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <Searchbar placeholder='Client name' onChangeText={handleChangeSearch} value={searchQuery} />
+        <PatientItem onSelectPatient={handleSelectPatient} />
+        <Divider />
+        <PatientItem onSelectPatient={handleSelectPatient} />
+        <Divider />
+        <PatientItem onSelectPatient={handleSelectPatient} />
+        <Divider />
+        <PatientItem onSelectPatient={handleSelectPatient} />
+        <Divider />
+        <PatientItem onSelectPatient={handleSelectPatient} />
+        <Divider />
+        <Fab />
+        <ClientProfile ref={clientProfileRef} />
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
