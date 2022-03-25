@@ -6,14 +6,7 @@ export type Props = {
 
 const PatientItem: React.FC<Props> = ({ onSelectPatient }) => {
   return (
-    <List.Item
-      title='Polad Mammadov'
-      description='addaddddddddddddd'
-      onPress={() => onSelectPatient('patient')}
-      right={() => (
-        <Avatar.Image size={50} source={{ uri: 'https://miro.medium.com/max/785/0*Ggt-XwliwAO6QURi.jpg' }} />
-      )}
-    />
+    <List.Item title='Polad Mammadov' description='addaddddddddddddd' onPress={() => onSelectPatient('patient')} />
   );
 };
 
