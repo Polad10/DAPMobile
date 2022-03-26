@@ -1,9 +1,13 @@
 import { FAB } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 
-export default function Fab() {
-  return <FAB style={styles.fab} icon='plus' onPress={() => console.log('Pressed')} />;
-}
+export type Props = {
+  onPress(): void;
+};
+
+const Fab: React.FC<Props> = ({ onPress }) => {
+  return <FAB style={styles.fab} icon='plus' onPress={onPress} />;
+};
 
 const styles = StyleSheet.create({
   fab: {
@@ -14,3 +18,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#673ab7',
   },
 });
+
+export default Fab;

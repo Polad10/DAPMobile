@@ -33,7 +33,7 @@ export default function TabTwoScreen() {
         <Divider />
         <PatientItem onSelectPatient={handleSelectPatient} />
         <Divider />
-        <Fab />
+        <Fab onPress={() => console.log('pressed')} />
         <ClientProfile ref={clientProfileRef} />
       </View>
     </TouchableWithoutFeedback>

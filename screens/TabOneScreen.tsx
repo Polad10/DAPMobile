@@ -38,7 +38,7 @@ export default class AgendaScreen extends Component<State> {
           //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
           // hideExtraDays={false}
         />
-        <Fab />
+        <Fab onPress={() => console.log('pressed')} />
       </View>
     );
   }

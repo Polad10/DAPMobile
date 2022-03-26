@@ -1,13 +1,15 @@
-import { Avatar, List } from 'react-native-paper';
+import { List } from 'react-native-paper';
 
 export type Props = {
   onSelectPatient(patient: string): void;
 };
 
-const PatientItem: React.FC<Props> = ({ onSelectPatient }) => {
+export default function PatientItem(props: Props) {
   return (
-    <List.Item title='Polad Mammadov' description='addaddddddddddddd' onPress={() => onSelectPatient('patient')} />
+    <List.Item
+      title='Polad Mammadov'
+      description='addaddddddddddddd'
+      onPress={() => props.onSelectPatient('patient')}
+    />
   );
-};
-
-export default PatientItem;
+}
