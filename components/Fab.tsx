@@ -5,9 +5,9 @@ export type Props = {
   onPress(): void;
 };
 
-const Fab: React.FC<Props> = ({ onPress }) => {
-  return <FAB style={styles.fab} icon='plus' onPress={onPress} />;
-};
+export default function Fab(props: Props) {
+  return <FAB style={styles.fab} icon='plus' onPress={props.onPress} />;
+}
 
 const styles = StyleSheet.create({
   fab: {
@@ -18,5 +18,3 @@ const styles = StyleSheet.create({
     backgroundColor: '#673ab7',
   },
 });
-
-export default Fab;
