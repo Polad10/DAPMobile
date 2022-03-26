@@ -1,8 +1,8 @@
-import { Portal, Modal, IconButton, Button, Surface, Headline, Divider, List } from 'react-native-paper';
+import { Portal, Modal, IconButton, Button, Headline, Divider, List } from 'react-native-paper';
 import * as React from 'react';
 import { Ref } from 'react';
 import { View } from '../components/Themed';
-import { Image } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export interface ClientProfileInterface {
   showModal(patient: string): void;
@@ -19,22 +19,22 @@ const ClientProfile = React.forwardRef((props, ref: Ref<ClientProfileInterface>)
 
   return (
     <Portal>
-      <Modal visible={visible} contentContainerStyle={{ flex: 1, justifyContent: 'flex-start' }} onDismiss={hideModal}>
-        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+      <Modal visible={visible} contentContainerStyle={styles.modal} onDismiss={hideModal}>
+        <View style={styles.close}>
           <IconButton icon='close' size={30} onPress={hideModal} />
         </View>
-        <View style={{ flex: 1 }}>
-          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Headline style={{ marginLeft: 20 }}>Polad Mammadov</Headline>
+        <View style={styles.header}>
+          <View style={styles.clientMainInfo}>
+            <Headline>Polad Mammadov</Headline>
           </View>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: 20, marginBottom: 10 }}>
+          <View style={styles.actions}>
             <Button>About</Button>
             <Button>Services</Button>
             <Button>Appointments</Button>
           </View>
           <Divider />
         </View>
-        <View style={{ flex: 3 }}>
+        <View style={styles.content}>
           <List.Item title='Baku, Azerbaijan' left={(props) => <List.Icon {...props} icon='home-city-outline' />} />
           <List.Item title='21.07.1994' left={(props) => <List.Icon {...props} icon='cake' />} />
           <List.Item title='+31630303030' left={(props) => <List.Icon {...props} icon='phone-outline' />} />
@@ -43,6 +43,34 @@ const ClientProfile = React.forwardRef((props, ref: Ref<ClientProfileInterface>)
       </Modal>
     </Portal>
   );
+});
+
+const styles = StyleSheet.create({
+  modal: {
+    flex: 1,
+    justifyContent: 'flex-start',
+  },
+  close: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  header: {
+    flex: 1,
+  },
+  clientMainInfo: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  actions: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  content: {
+    flex: 3,
+  },
 });
 
 export default ClientProfile;
