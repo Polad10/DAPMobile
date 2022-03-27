@@ -5,7 +5,6 @@ import { View } from '../components/Themed';
 import PatientItem from '../components/items/PatientItem';
 import Fab from '../components/Fab';
 import ClientProfile from './ClientProfile';
-import { useRef } from 'react';
 
 export default function TabTwoScreen() {
   const [searchQuery, setSearchQuery] = React.useState('');
