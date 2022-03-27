@@ -1,27 +1,19 @@
 import { Portal, Modal, IconButton, Button, Headline, Divider, List } from 'react-native-paper';
 import * as React from 'react';
-import { Ref } from 'react';
 import { View } from '../components/Themed';
 import { StyleSheet } from 'react-native';
 
-export interface ClientProfileInterface {
-  showModal(patient: string): void;
-  hideModal(): void;
-}
+export type Props = {
+  visible: boolean;
+  onHide(): void;
+};
 
-const ClientProfile = React.forwardRef((props, ref: Ref<ClientProfileInterface>) => {
-  const [visible, setVisible] = React.useState(false);
-
-  const showModal = (patient: string) => setVisible(true);
-  const hideModal = () => setVisible(false);
-
-  React.useImperativeHandle(ref, () => ({ showModal, hideModal }));
-
+export default function ClientProfile(props: Props) {
   return (
     <Portal>
-      <Modal visible={visible} contentContainerStyle={styles.modal} onDismiss={hideModal}>
+      <Modal visible={props.visible} contentContainerStyle={styles.modal} onDismiss={props.onHide}>
         <View style={styles.close}>
-          <IconButton icon='close' size={30} onPress={hideModal} />
+          <IconButton icon='close' size={30} onPress={props.onHide} />
         </View>
         <View style={styles.header}>
           <View style={styles.clientMainInfo}>
@@ -43,7 +35,7 @@ const ClientProfile = React.forwardRef((props, ref: Ref<ClientProfileInterface>)
       </Modal>
     </Portal>
   );
-});
+}
 
 const styles = StyleSheet.create({
   modal: {
@@ -72,5 +64,3 @@ const styles = StyleSheet.create({
     flex: 3,
   },
 });
-
-export default ClientProfile;

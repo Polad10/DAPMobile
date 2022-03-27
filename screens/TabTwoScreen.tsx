@@ -5,19 +5,19 @@ import { View } from '../components/Themed';
 import PatientItem from '../components/items/PatientItem';
 import Fab from '../components/Fab';
 import ClientProfile from './ClientProfile';
-import { ClientProfileInterface } from './ClientProfile';
 import { useRef } from 'react';
 
 export default function TabTwoScreen() {
   const [searchQuery, setSearchQuery] = React.useState('');
+  const [clientProfileVisible, setClientProfileVisible] = React.useState(false);
 
   const handleChangeSearch = (query: React.SetStateAction<string>) => setSearchQuery(query);
   const handleSelectPatient = (patient: string) => {
     Keyboard.dismiss();
-    clientProfileRef?.current?.showModal(patient);
+    setClientProfileVisible(true);
   };
 
-  const clientProfileRef = useRef<ClientProfileInterface>(null);
+  const handleHideClientProfile = () => setClientProfileVisible(false);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -34,7 +34,7 @@ export default function TabTwoScreen() {
         <PatientItem onSelectPatient={handleSelectPatient} />
         <Divider />
         <Fab onPress={() => console.log('pressed')} />
-        <ClientProfile ref={clientProfileRef} />
+        <ClientProfile visible={clientProfileVisible} onHide={handleHideClientProfile} />
       </View>
     </TouchableWithoutFeedback>
   );
