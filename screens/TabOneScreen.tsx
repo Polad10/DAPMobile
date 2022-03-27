@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { Alert, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Agenda, DateData, AgendaEntry, AgendaSchedule } from 'react-native-calendars';
-import Fab from '../components/Fab';
+import Fab from './components/Fab';
+import NewAppointment from './forms/NewAppointment';
 
 interface State {
   items?: AgendaSchedule;
+  newAppointmentVisible: boolean;
 }
 
 export default class AgendaScreen extends Component<State> {
   state: State = {
     items: undefined,
+    newAppointmentVisible: false,
   };
 
   render() {
@@ -38,10 +41,27 @@ export default class AgendaScreen extends Component<State> {
           //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
           // hideExtraDays={false}
         />
-        <Fab onPress={() => console.log('pressed')} />
+        <Fab onPress={this.handleShowNewAppointment} />
+
+        <NewAppointment
+          visible={this.state.newAppointmentVisible}
+          onHide={this.handleHideNewAppointment}
+        ></NewAppointment>
       </View>
     );
   }
+
+  handleShowNewAppointment = () => {
+    this.setState({
+      newAppointmentVisible: true,
+    });
+  };
+
+  handleHideNewAppointment = () => {
+    this.setState({
+      newAppointmentVisible: false,
+    });
+  };
 
   loadItems = (day: DateData) => {
     const items = this.state.items || {};

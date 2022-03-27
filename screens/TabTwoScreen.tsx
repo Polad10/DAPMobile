@@ -1,10 +1,11 @@
 import { StyleSheet, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import * as React from 'react';
 import { Searchbar, Divider } from 'react-native-paper';
-import { View } from '../components/Themed';
-import PatientItem from '../components/items/PatientItem';
-import Fab from '../components/Fab';
+import { View } from './components/Themed';
+import PatientItem from './components/items/PatientItem';
+import Fab from './components/Fab';
 import ClientProfile from './ClientProfile';
+import { transparent } from 'react-native-paper/lib/typescript/styles/colors';
 
 export default function TabTwoScreen() {
   const [searchQuery, setSearchQuery] = React.useState('');
@@ -21,7 +22,13 @@ export default function TabTwoScreen() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        <Searchbar placeholder='Client name' onChangeText={handleChangeSearch} value={searchQuery} />
+        <Searchbar
+          placeholder='Client name'
+          onChangeText={handleChangeSearch}
+          value={searchQuery}
+          style={styles.searchbar}
+        />
+        <Divider />
         <PatientItem onSelectPatient={handleSelectPatient} />
         <Divider />
         <PatientItem onSelectPatient={handleSelectPatient} />
@@ -42,5 +49,8 @@ export default function TabTwoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  searchbar: {
+    backgroundColor: 'transparent',
   },
 });

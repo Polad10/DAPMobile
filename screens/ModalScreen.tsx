@@ -1,6 +1,6 @@
 import { Portal, Modal, IconButton } from 'react-native-paper';
 import * as React from 'react';
-import { View } from '../components/Themed';
+import { View } from './components/Themed';
 import { StyleSheet } from 'react-native';
 
 export type Props = {

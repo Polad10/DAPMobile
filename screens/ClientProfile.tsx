@@ -1,6 +1,6 @@
 import { Button, Headline, Divider, List } from 'react-native-paper';
 import * as React from 'react';
-import { View } from '../components/Themed';
+import { View } from './components/Themed';
 import { StyleSheet } from 'react-native';
 import ModalScreen from './ModalScreen';
 

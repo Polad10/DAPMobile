@@ -14,7 +14,7 @@ export default function App() {
     return null;
   } else {
     return (
-      <PaperProvider theme={ theme }>
+      <PaperProvider theme={theme}>
         <SafeAreaProvider>
           <Navigation colorScheme={colorScheme} />
           <StatusBar />
@@ -25,5 +25,5 @@ export default function App() {
 }
 
 const theme = {
-  ...DarkTheme
+  ...DarkTheme,
 };
