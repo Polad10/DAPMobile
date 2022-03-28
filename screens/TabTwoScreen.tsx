@@ -4,12 +4,10 @@ import { Searchbar, Divider } from 'react-native-paper';
 import { View } from './components/Themed';
 import PatientItem from './components/items/PatientItem';
 import Fab from './components/Fab';
-import ClientProfile from './ClientProfile';
 import { useNavigation } from '@react-navigation/native';
 
 export default function TabTwoScreen() {
   const [searchQuery, setSearchQuery] = React.useState('');
-  const [clientProfileVisible, setClientProfileVisible] = React.useState(false);
 
   const navigation = useNavigation();
 
@@ -19,8 +17,6 @@ export default function TabTwoScreen() {
     //setClientProfileVisible(true);
     navigation.navigate('ClientProfile');
   };
-
-  const handleHideClientProfile = () => setClientProfileVisible(false);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
