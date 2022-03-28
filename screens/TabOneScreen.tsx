@@ -1,21 +1,29 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { Component } from 'react';
 import { Alert, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Agenda, DateData, AgendaEntry, AgendaSchedule } from 'react-native-calendars';
 import Fab from './components/Fab';
-import NewAppointment from './forms/NewAppointment';
 
 interface State {
   items?: AgendaSchedule;
-  newAppointmentVisible: boolean;
+  navigation: any;
 }
 
-export default class AgendaScreen extends Component<State> {
+export default function (props: any) {
+  const navigation = useNavigation();
+
+  return <AgendaScreen {...props} navigation={navigation} />;
+}
+
+class AgendaScreen extends Component<State> {
   state: State = {
     items: undefined,
-    newAppointmentVisible: false,
+    navigation: undefined,
   };
 
   render() {
+    const { navigation } = this.props;
+
     return (
       <View style={styles.container}>
         <Agenda
@@ -41,26 +49,13 @@ export default class AgendaScreen extends Component<State> {
           //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
           // hideExtraDays={false}
         />
-        <Fab onPress={this.handleShowNewAppointment} />
-
-        <NewAppointment
-          visible={this.state.newAppointmentVisible}
-          onHide={this.handleHideNewAppointment}
-        ></NewAppointment>
+        <Fab onPress={() => this.handleShowNewAppointment(navigation)} />
       </View>
     );
   }
 
-  handleShowNewAppointment = () => {
-    this.setState({
-      newAppointmentVisible: true,
-    });
-  };
-
-  handleHideNewAppointment = () => {
-    this.setState({
-      newAppointmentVisible: false,
-    });
+  handleShowNewAppointment = (navigation: any) => {
+    navigation.navigate('NewAppointment');
   };
 
   loadItems = (day: DateData) => {

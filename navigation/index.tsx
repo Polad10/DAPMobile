@@ -8,17 +8,18 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
-
+import { ColorSchemeName } from 'react-native';
+import { Appbar } from 'react-native-paper';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
-import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
+import { RootStackParamList, RootTabParamList } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import { en, registerTranslation } from 'react-native-paper-dates';
+import ClientProfile from '../screens/ClientProfile';
+import NewAppointment from '../screens/forms/NewAppointment';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -36,11 +37,12 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name='Root' component={BottomTabNavigator} options={{ headerShown: false }} />
+    <Stack.Navigator screenOptions={{ header: CustomNavigationBar }}>
+      <Stack.Screen name='Root' component={BottomTabNavigator} />
       <Stack.Screen name='NotFound' component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name='Modal' component={ModalScreen} />
+        <Stack.Screen name='ClientProfile' component={ClientProfile} />
+        <Stack.Screen name='NewAppointment' component={NewAppointment} />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -67,6 +69,7 @@ function BottomTabNavigator() {
         component={TabOneScreen}
         options={{
           title: 'Appointments',
+          headerShown: false,
           tabBarIcon: ({ color }) => <Ionicons name='calendar-outline' size={25} color={color} />,
         }}
       />
@@ -75,6 +78,7 @@ function BottomTabNavigator() {
         component={TabTwoScreen}
         options={{
           title: 'Clients',
+          headerShown: false,
           tabBarIcon: ({ color }) => <Ionicons name='people-outline' size={25} color={color} />,
         }}
       />
@@ -87,6 +91,15 @@ function BottomTabNavigator() {
  */
 function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome>['name']; color: string }) {
   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
+}
+
+function CustomNavigationBar({ navigation, back }) {
+  return (
+    <Appbar.Header>
+      {back ? <Appbar.BackAction onPress={navigation.goBack} /> : undefined}
+      <Appbar.Content title='Test' />
+    </Appbar.Header>
+  );
 }
 
 registerTranslation('en', en);

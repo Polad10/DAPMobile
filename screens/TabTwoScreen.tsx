@@ -5,16 +5,19 @@ import { View } from './components/Themed';
 import PatientItem from './components/items/PatientItem';
 import Fab from './components/Fab';
 import ClientProfile from './ClientProfile';
-import { transparent } from 'react-native-paper/lib/typescript/styles/colors';
+import { useNavigation } from '@react-navigation/native';
 
 export default function TabTwoScreen() {
   const [searchQuery, setSearchQuery] = React.useState('');
   const [clientProfileVisible, setClientProfileVisible] = React.useState(false);
 
+  const navigation = useNavigation();
+
   const handleChangeSearch = (query: React.SetStateAction<string>) => setSearchQuery(query);
   const handleSelectPatient = (patient: string) => {
     Keyboard.dismiss();
-    setClientProfileVisible(true);
+    //setClientProfileVisible(true);
+    navigation.navigate('ClientProfile');
   };
 
   const handleHideClientProfile = () => setClientProfileVisible(false);
@@ -40,7 +43,6 @@ export default function TabTwoScreen() {
         <PatientItem onSelectPatient={handleSelectPatient} />
         <Divider />
         <Fab onPress={() => console.log('pressed')} />
-        <ClientProfile visible={clientProfileVisible} onHide={handleHideClientProfile} />
       </View>
     </TouchableWithoutFeedback>
   );

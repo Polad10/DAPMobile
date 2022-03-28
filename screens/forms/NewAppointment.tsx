@@ -1,18 +1,12 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
-import ModalScreen from '../ModalScreen';
+import { StyleSheet, View } from 'react-native';
 import { DatePickerInput } from 'react-native-paper-dates';
-
-export type Props = {
-  visible: boolean;
-  onHide(): void;
-};
 
 export type DateParams = {
   date: Date | undefined;
 };
 
-export default function NewAppointment(props: Props) {
+export default function NewAppointment() {
   const [date, setDate] = React.useState<Date | undefined>(undefined);
 
   const confirmDate = (params: DateParams) => {
@@ -20,10 +14,14 @@ export default function NewAppointment(props: Props) {
   };
 
   return (
-    <ModalScreen visible={props.visible} onHide={props.onHide}>
+    <View style={styles.container}>
       <DatePickerInput locale='en' label='Date' value={date} onChange={(d) => setDate(d)}></DatePickerInput>
-    </ModalScreen>
+    </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

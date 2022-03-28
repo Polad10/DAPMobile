@@ -2,16 +2,10 @@ import { Button, Headline, Divider, List } from 'react-native-paper';
 import * as React from 'react';
 import { View } from './components/Themed';
 import { StyleSheet } from 'react-native';
-import ModalScreen from './ModalScreen';
 
-export type Props = {
-  visible: boolean;
-  onHide(): void;
-};
-
-export default function ClientProfile(props: Props) {
+export default function ClientProfile() {
   return (
-    <ModalScreen visible={props.visible} onHide={props.onHide}>
+    <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.clientMainInfo}>
           <Headline>Polad Mammadov</Headline>
@@ -29,11 +23,14 @@ export default function ClientProfile(props: Props) {
         <List.Item title='+31630303030' left={(props) => <List.Icon {...props} icon='phone-outline' />} />
         <List.Item title='Extra info...' left={(props) => <List.Icon {...props} icon='information-outline' />} />
       </View>
-    </ModalScreen>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   header: {
     flex: 1,
   },
